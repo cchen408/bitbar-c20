@@ -15,6 +15,33 @@ btg_result = json.loads(btg_url)
 
 number_of_c20 = 0  # change this to the number of C20 tokens that you own
 
+symbol_path_map = {
+    'BTC': 'bitcoin',
+    'ETH': 'ethereum',
+    'BCH': 'bitcoin-cash',
+    'XRP': 'ripple',
+    'DASH': 'dash',
+    'LTC': 'litecoin',
+    'MIOTA': 'iota',
+    'XMR': 'monero',
+    'NEO': 'neo',
+    'XEM': 'nem',
+    'ETC': 'ethereum-classic',
+    'LSK': 'lisk',
+    'QTUM': 'qtum',
+    'EOS': 'eos',
+    'ZEC': 'zcash',
+    'OMG': 'omisego',
+    'ADA': 'cardano',
+    'HSR': 'hshare',
+    'XLM': 'stellar',
+    'WAVES': 'waves',
+    'PPT': 'populous',
+    'STRAT': 'stratis',
+    'BTS': 'bitshares',
+    'ARK': 'ark'
+}
+
 def work():
     if result['presale'] > 0 and result['usd_value'] > 0:
 
@@ -42,6 +69,6 @@ def work():
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
             crypto_percentage = crypto_value/float(result['usd_value'])*100
-            print '{:s}: {:.2f}% ${:,}'.format(crypto_name, crypto_percentage, holding['value'])
+            print '{:s}: {:.2f}% ${:,} | href=https://coinmarketcap.com/currencies/{:s}'.format(crypto_name, crypto_percentage, holding['value'], symbol_path_map[crypto_name])
 
 work()
