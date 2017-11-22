@@ -33,7 +33,7 @@ def work():
         print '---'
 
         # print number of c20 you have
-        print 'c20: ${:.4f}'.format(number_of_c20);
+        print 'c20: ${:.4f} | color=#123def href=https://crypto20.com/en/'.format(number_of_c20);
 
         # print holdings
         holdings = result['holdings'];
