@@ -7,22 +7,37 @@
 
 from urllib import urlopen
 url = urlopen('https://crypto20.com/status').read()
+btg_url = urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read()
 
 import json
 result = json.loads(url)
+btg_result = json.loads(btg_url)
 
 number_of_c20 = 0  # change this to the number of C20 tokens that you own
 
 def work():
     if result['presale'] > 0 and result['usd_value'] > 0:
-        net_asset_value = float(result['nav_per_token'])
+
+        # calculate btg nav
+        btg_val = int(float(btg_result[0]['price_usd']) * 458)
+        btg_nav = float(btg_val) / float(result['presale']) * 0.98 * 0.87
+
+        # add on top of current nav
+        net_asset_value = float(result['nav_per_token']) + btg_nav
         usd_value = net_asset_value * number_of_c20
-        formatted = '${:.4f} ${:,} ${:,}'.format(net_asset_value, int(usd_value), int(result['usd_value']))
-        print formatted
+
+        # print nav, value of your coins, and total fund value
+        print '${:.3f} ${:,} ${:,}'.format(net_asset_value, int(usd_value), btg_val + int(result['usd_value']))
+
+        # separator bitbar recognizes and puts everything under it into a menu
+        print '---'
+
+        # print number of c20 you have
+        print 'c20: ${:.4f}'.format(number_of_c20);
 
         # print holdings
-        print '---'
         holdings = result['holdings'];
+        holdings.append({'name': 'BTG', 'value': btg_val})
         for holding in holdings:
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
@@ -30,4 +45,3 @@ def work():
             print '{:s}: {:.2f}% ${:,}'.format(crypto_name, crypto_percentage, holding['value'])
 
 work()
-
