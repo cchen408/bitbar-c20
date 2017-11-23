@@ -8,13 +8,25 @@
 from urllib import urlopen
 url = urlopen('https://crypto20.com/status').read()
 btg_url = urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read()
+top_25 = urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=25').read()
 
 import json
 result = json.loads(url)
 btg_result = json.loads(btg_url)
+top_25_result = json.loads(top_25);
 
 number_of_c20 = 0  # change this to the number of C20 tokens that you own
 
+# parse out price and put here
+symbol_price = {
+    'bitcoin-gold': btg_result[0]['price_usd']
+};
+
+# loop through prices rather than call api more than once
+for c in top_25_result:
+    symbol_price[c['id']] = float(c['price_usd'])
+
+# symbol to name map
 symbol_path_map = {
     'BTC': 'bitcoin',
     'ETH': 'ethereum',
@@ -39,7 +51,8 @@ symbol_path_map = {
     'PPT': 'populous',
     'STRAT': 'stratis',
     'BTS': 'bitshares',
-    'ARK': 'ark'
+    'ARK': 'ark',
+    'BTG': 'bitcoin-gold'
 }
 
 def work():
@@ -69,6 +82,7 @@ def work():
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
             crypto_percentage = crypto_value/float(result['usd_value'])*100
-            print '{:s}: {:.2f}% ${:,} | href=https://coinmarketcap.com/currencies/{:s}'.format(crypto_name, crypto_percentage, holding['value'], symbol_path_map[crypto_name])
+            crypto_price = float(symbol_price[symbol_path_map[crypto_name]])
+            print '{:s}: {:.2f}% ${:,} ${:,.2f} | href=https://coinmarketcap.com/currencies/{:s}'.format(crypto_name, crypto_percentage, holding['value'], crypto_price, symbol_path_map[crypto_name])
 
 work()
