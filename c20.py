@@ -125,6 +125,7 @@ def update_c20():
         # print holdings
         holdings = result['holdings'];
         for holding in holdings:
+            holdings.append({'name': 'BTG', 'value': btg_val})
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
             crypto_percentage = crypto_value / float(result['usd_value']) * 100
