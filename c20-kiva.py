@@ -137,7 +137,7 @@ def update_c20():
                 crypto_percentage,
                 c20_value,
                 crypto_price,
-                crypto_path,
+                crypto_name,
                 crypto_img)
 
 update_c20()

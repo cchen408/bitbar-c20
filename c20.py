@@ -108,24 +108,26 @@ def update_c20():
 
         # print nav and value of your coins
         print 'NAV: ${:.4f}| color=#000'.format(net_asset_value)
-        print 'My C20 Value: ${:,} | color=#000'.format(int(usd_value))
+        print 'Value: ${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
 
         # separator bitbar recognizes and puts everything under it into a menu that doesn't get rotated in
         print '---'
 
         # print total fund value
-        print 'Fund: ${:,} | color=#000'.format(int(result['usd_value']+btg_val))
+        print 'Fund:\t${:,} | href=https://crypto20.com/portal/insights/'.format(int(result['usd_value']+btg_val))
 
         # print number of c20 you have
-        print 'C20: \t{:.4f} | href=https://crypto20.com/en/ image={}'.format(number_of_c20, symbol_image_map['C20'])
+        print 'C20:\t{:.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
 
         # print total crypto market cap
-        print 'Market Cap:\t${:,} | href=https://coinmarketcap.com'.format(int(crypto_global_result['total_market_cap_usd']))
+        print 'Market Cap:\t${:,} | href=https://livecoinwatch.com'.format(int(crypto_global_result['total_market_cap_usd']))
+
+        print '---'
 
         # print holdings
         holdings = result['holdings'];
+        holdings.append({'name': 'BTG', 'value': btg_val})
         for holding in holdings:
-            holdings.append({'name': 'BTG', 'value': btg_val})
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
             crypto_percentage = crypto_value / float(result['usd_value']) * 100
@@ -134,12 +136,12 @@ def update_c20():
             crypto_img = symbol_image_map[crypto_name]
             crypto_price = float(symbol_price[crypto_path])
 
-            print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
+            print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://livecoinwatch.com/coins/{:s} image={}'.format(
                 crypto_name,
                 crypto_percentage,
                 c20_value,
                 crypto_price,
-                crypto_path,
+                crypto_name,
                 crypto_img)
 
 update_c20()
