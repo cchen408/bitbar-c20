@@ -6,12 +6,14 @@
 # <bitbar.desc>Displays current C20 NAV and USD asset worth</bitbar.desc>
 
 from urllib import urlopen
+
 url = urlopen('https://crypto20.com/status').read()
 btg_url = urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read()
 top_25 = urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=25').read()
 crypto_global = urlopen('https://api.coinmarketcap.com/v1/global/').read()
 
 import json
+
 result = json.loads(url)
 btg_result = json.loads(btg_url)
 top_25_result = json.loads(top_25);
@@ -91,6 +93,7 @@ symbol_image_map = {
     'BTG': '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'
 }
 
+
 def update_c20():
     if result['presale'] > 0 and result['usd_value'] > 0:
 
@@ -105,13 +108,15 @@ def update_c20():
         print '| templateImage={}'.format(symbol_image_map['C20'])
         print '---'
         # print nav, value of your coins, and total fund value
-        print 'NAV:\t\t${:.4f}\nHoldings:\t${:,}\nFund:\t\t${:,}'.format(net_asset_value, int(usd_value), btg_val + int(result['usd_value']))
+        print 'NAV:\t\t${:.4f} | color=#000'.format(net_asset_value)
+        print 'Holdings:\t${:,} | color=#000'.format(int(usd_value))
+        print 'Fund:\t\t${:,} | color=#000'.format(btg_val + int(result['usd_value']))
 
         # print number of c20 you have
-        print 'C20 \t{:.4f} | image={}'.format(number_of_c20, symbol_image_map['C20'])
+        print 'C20 \t{:.4f} | color=#000 image={}'.format(number_of_c20, symbol_image_map['C20'])
 
         # print total crypto market cap
-        print 'Market Cap:\t${:,}'.format(int(crypto_global_result['total_market_cap_usd']))
+        print 'Market Cap:\t${:,} | color=#000'.format(int(crypto_global_result['total_market_cap_usd']))
 
         # separator bitbar recognizes and puts everything under it into a menu
         print '---'
@@ -122,10 +127,15 @@ def update_c20():
         for holding in holdings:
             crypto_name = holding['name']
             crypto_value = float(holding['value'])
-            crypto_percentage = crypto_value/float(result['usd_value'])*100
+            crypto_percentage = crypto_value / float(result['usd_value']) * 100
+            crypto_path = symbol_path_map[crypto_name]
             crypto_price = float(symbol_price[symbol_path_map[crypto_name]])
-            print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | image={}'.format(crypto_name,
-                                                                      crypto_percentage, holding['value'], crypto_price,
-                                                                      symbol_image_map[crypto_name])
+            print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
+                crypto_name,
+                crypto_percentage,
+                holding['value'],
+                crypto_price,
+                crypto_path,
+                symbol_image_map[crypto_name])
 
 update_c20()
