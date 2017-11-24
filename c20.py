@@ -106,21 +106,22 @@ def update_c20():
         net_asset_value = float(result['nav_per_token']) + btg_nav
         usd_value = net_asset_value * number_of_c20
 
-        # print nav and value of your coins
-        print 'NAV: ${:.4f}| color=#000'.format(net_asset_value)
-        print 'Value: ${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
+        # menu bar icon
+        print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'])
 
         # separator bitbar recognizes and puts everything under it into a menu that doesn't get rotated in
         print '---'
 
+        print 'Holdings:\t\t${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
+
         # print total fund value
-        print 'Fund:\t${:,} | href=https://crypto20.com/portal/insights/'.format(int(result['usd_value']+btg_val))
+        print 'Fund:\t\t\t${:,} | href=https://crypto20.com/portal/insights/'.format(int(result['usd_value']+btg_val))
 
         # print number of c20 you have
-        print 'C20:\t{:.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
+        print 'C20:\t\t{:.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
 
         # print total crypto market cap
-        print 'Market Cap:\t${:,} | href=https://livecoinwatch.com'.format(int(crypto_global_result['total_market_cap_usd']))
+        print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com'.format(int(crypto_global_result['total_market_cap_usd']))
 
         print '---'
 
