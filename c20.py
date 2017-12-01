@@ -1,21 +1,13 @@
 #!/usr/bin/python
 
-# To use this script, download and save. Using Terminal.app, change to the
-# directory where you saved this file. For example, if you saved to your
-# Downloads folder you will type:
-#
-#   cd ~/Downloads
-#
-# Then make this script executable by typing:
-#
-#   chmod +x c20.py
-#
-# Get BitBar from https://getbitbar.com (currently BitBar-v1.9.2.zip) and run
-# it. You will be prompted for a Plugins directory. Set this to the folder where
-# you saved c20.py, such as your Downloads folder and you are done.
-#
-# You can also set the number of C20 tokens that you own below to show how much
-# your holdings are worth.
+# <bitbar.title>Crypto20</bitbar.title>
+# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.author>Christopher Chen</bitbar.author>
+# <bitbar.author.github>cchen408</bitbar.author.github>
+# <bitbar.desc>Display Nav and Underlying Asset Information</bitbar.desc>
+# <bitbar.image>https://static.crypto20.com/images/CRYPTO20-Logo-Gold-Cropped-512.png</bitbar.image>
+# <bitbar.dependencies>python</bitbar.dependencies>
+# <bitbar.abouturl>https://github.com/cchen408/bitbar-c20</bitbar.abouturl>
 
 import json
 from urllib import urlopen
@@ -139,10 +131,9 @@ for holding in holdings:
     crypto_img = symbol_image_map[crypto_name]
     crypto_price = float(symbol_price[crypto_path])
 
-    print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://livecoinwatch.com/coins/{:s} image={}'.format(
+    print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://livecoinwatch.com/ image={}'.format(
         crypto_name,
         crypto_percentage,
         c20_value,
         crypto_price,
-        crypto_name,
         crypto_img)
