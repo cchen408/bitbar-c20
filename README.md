@@ -9,8 +9,8 @@ Screenshots
 ---
 The only difference is one has the nav at the top
 
-c20.py
+### c20.py
 ![chris](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/chris.png)
 
-c20-kiva.py
+### c20-kiva.py
 ![kiva](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/kiva.png)
