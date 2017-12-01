@@ -7,4 +7,4 @@ Crypto20 Bitbar Plugin
 Screenshots
 ---
 
-![screenshot](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/test-data.png)
+![screenshot](https://raw.githubusercontent.com/cchen408/bitbar-c20/plugin/screenshots/test-data.png)

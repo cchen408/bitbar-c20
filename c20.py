@@ -5,7 +5,7 @@
 # <bitbar.author>Christopher Chen</bitbar.author>
 # <bitbar.author.github>cchen408</bitbar.author.github>
 # <bitbar.desc>Display Nav and Underlying Asset Information</bitbar.desc>
-# <bitbar.image>https://static.crypto20.com/images/CRYPTO20-Logo-Gold-Cropped-512.png</bitbar.image>
+# <bitbar.image>https://raw.githubusercontent.com/cchen408/bitbar-c20/plugin/screenshots/test-data.png</bitbar.image>
 # <bitbar.dependencies>python</bitbar.dependencies>
 # <bitbar.abouturl>https://github.com/cchen408/bitbar-c20</bitbar.abouturl>
 
