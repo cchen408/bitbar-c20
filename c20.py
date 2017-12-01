@@ -118,7 +118,7 @@ print 'Holdings:\t${:,} | href=https://crypto20.com/users/'.format(int(usd_value
 print 'Fund:\t\t${:,} | href=https://crypto20.com/portal/insights/'.format(btg_val + int(result['usd_value']))
 
 # print number of c20 you have
-print 'C20: \t{:.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
+print 'C20: \t{:,.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
 
 # print total crypto market cap
 print 'Market Cap:\t${:,} | href=https://livecoinwatch.com'.format(int(crypto_global_result['total_market_cap_usd']))
