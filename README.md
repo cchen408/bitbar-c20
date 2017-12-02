@@ -12,7 +12,7 @@ In reverse chronological order..
 ### c20-full.py
 ![hobbsAU](https://raw.githubusercontent.com/hobbsAU/bitbar-c20/hobbsAU-bitbarC20-v2/screenshots/hobbsAU.png)
 
-### c20-kiva.py
+### c20-icon.py
 ![kiva](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/kiva.png)
 
 ### c20.py
