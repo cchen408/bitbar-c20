@@ -14,3 +14,6 @@ The only difference is one has the nav at the top
 
 ### c20-kiva.py
 ![kiva](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/kiva.png)
+
+### c20v2.py
+![hobbsAU](https://raw.githubusercontent.com/hobbsAU/bitbar-c20/hobbsAU-bitbarC20-v2/screenshots/hobbsAU.png)
