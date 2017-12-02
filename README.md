@@ -1,6 +1,6 @@
 ## Crypto20 Bitbar Plugin
 ---
-1. Copy `c20.py`, `c20-icon.py`, `c20-full` into your bitbar plugins directory
+1. Copy `c20.py`, `c20-icon.py`, `c20-full.py` into your bitbar plugins directory
 2. In the command prompt run ```chmod 755 c20.py```
 3. Refresh your bitbar
 
