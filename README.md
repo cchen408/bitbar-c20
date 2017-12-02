@@ -22,5 +22,5 @@ In reverse chronological order..
 ## Contributors
 ---
 * ([chrischen](https://github.com/cchen408))
-* ([kiva](https://github.com/michaelwookey)) - original c20.py
-* ([hobbsAU](https://github.com/hobbsAU)) - full version
+* ([kiva](https://github.com/michaelwookey))
+* ([hobbsAU](https://github.com/hobbsAU)) - c20-full.py
