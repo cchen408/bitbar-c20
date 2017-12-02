@@ -73,7 +73,7 @@ symbol_image_map = {
 }
 
 # calculate NAV and total value
-net_asset_value = float(result['nav_per_token']) 
+net_asset_value = float(result['nav_per_token'])
 usd_value = net_asset_value * number_of_c20
 
 # menu bar icon
@@ -100,6 +100,8 @@ print '---'
 
 # print holdings
 holdings = result['holdings'];
+
+print 'name \t   \t  \t price \t   \t\t   \t % \t   \t value \t   \t amount '
 
 for holding in holdings:
     crypto_name = holding['name']
