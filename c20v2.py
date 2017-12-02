@@ -73,7 +73,7 @@ symbol_image_map = {
 }
 
 # calculate NAV and total value
-net_asset_value = float(result['nav_per_token']) 
+net_asset_value = float(result['nav_per_token'])
 usd_value = net_asset_value * number_of_c20
 
 # menu bar icon
@@ -92,7 +92,7 @@ print 'Investors:\t\t{:,} | href=https://crypto20.com/portal/performance/ image=
 print '---'
 
 # print number, value of c20 you have
-print 'My Tokens: \t\t{:.2f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
+print 'My Tokens: \t\t{:,.2f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
 print 'Value (USD): \t${:,} | href=https://crypto20.com/users/ image={}'.format(int(usd_value), symbol_image_map['C20'])
 
 # separator bitbar recognizes and puts everything under it into a menu
@@ -100,6 +100,8 @@ print '---'
 
 # print holdings
 holdings = result['holdings'];
+
+print 'name \t   \t  \t price \t   \t\t   \t % \t   \t value \t   \t amount '
 
 for holding in holdings:
     crypto_name = holding['name']
