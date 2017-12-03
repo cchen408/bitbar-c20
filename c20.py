@@ -25,6 +25,8 @@ number_of_c20 = 0
 
 result = json.loads(urlopen('https://crypto20.com/status').read())
 btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
+eth_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/ethereum').read())
+btc_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin').read())
 top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=25').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
 
@@ -106,6 +108,16 @@ btg_nav = float(btg_val) / float(result['presale']) * 0.98 * 0.87
 
 # add on top of current nav
 net_asset_value = float(result['nav_per_token']) + btg_nav
+
+# calculate the price in eth
+eth_price = float(eth_result[0]['price_usd'])
+nav_eth = net_asset_value / eth_price
+
+# calculate the price in btc
+btc_price = float(btc_result[0]['price_usd'])
+nav_btc = net_asset_value / btc_price
+
+# calculate total value
 usd_value = net_asset_value * number_of_c20
 
 # menu bar icon
@@ -113,7 +125,13 @@ print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t\t${:.4f} | color=#000'.format(net_asset_value)
+print 'NAV USD:\t${:.4f} | color=#000'.format(net_asset_value)
+
+# print nav in ETH and BTC with separator
+# print 'NAV ETH:\t{:.8f} ETH | color=#000'.format(nav_eth)
+# print 'NAV BTC:\t{:.8f} BTC | color=#000'.format(nav_btc)
+# print '---'
+
 print 'Holdings:\t${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
 print 'Fund:\t\t${:,} | href=https://crypto20.com/portal/insights/'.format(btg_val + int(result['usd_value']))
 
