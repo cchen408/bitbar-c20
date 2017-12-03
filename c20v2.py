@@ -21,7 +21,8 @@ import json
 from urllib import urlopen
 
 # change this to the number of C20 tokens that you own
-number_of_c20 = 1000
+number_of_c20 = 5000.9133
+spent_on_c20 = (number_of_c20*1.1)
 
 # retrieve live market data
 result = json.loads(urlopen('https://crypto20.com/status').read())
@@ -75,6 +76,7 @@ symbol_image_map = {
 # calculate NAV and total value
 net_asset_value = float(result['nav_per_token'])
 usd_value = net_asset_value * number_of_c20
+usd_profit = usd_value - spent_on_c20
 
 # menu bar icon
 print '${:.2f}| templateImage={}'.format(net_asset_value,symbol_image_map['C20'])
@@ -93,7 +95,9 @@ print '---'
 
 # print number, value of c20 you have
 print 'My Tokens: \t\t{:,.2f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
+print 'Cost  (USD): \t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(spent_on_c20, symbol_image_map['C20'])
 print 'Value (USD): \t${:,} | href=https://crypto20.com/users/ image={}'.format(int(usd_value), symbol_image_map['C20'])
+print 'Profit (USD): \t${:,} | href=https://crypto20.com/users/ image={}'.format(int(usd_profit), symbol_image_map['C20'])
 
 # separator bitbar recognizes and puts everything under it into a menu
 print '---'
