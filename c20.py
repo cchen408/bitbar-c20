@@ -128,9 +128,9 @@ print '---'
 print 'NAV USD:\t${:.4f} | color=#000'.format(net_asset_value)
 
 # print nav in ETH and BTC with separator
-# print 'NAV ETH:\t{:.8f} ETH | color=#000'.format(nav_eth)
-# print 'NAV BTC:\t{:.8f} BTC | color=#000'.format(nav_btc)
-# print '---'
+print 'NAV ETH:\t{:.8f} ETH | color=#000'.format(nav_eth)
+print 'NAV BTC:\t{:.8f} BTC | color=#000'.format(nav_btc)
+print '---'
 
 print 'Holdings:\t${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
 print 'Fund:\t\t${:,} | href=https://crypto20.com/portal/insights/'.format(btg_val + int(result['usd_value']))
