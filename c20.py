@@ -142,7 +142,6 @@ print '---'
 print 'Tokens Issued:\t{:,} | href=https://crypto20.com/portal/performance/ image={}'.format(int(result['presale']), symbol_image_map['C20'])
 print 'Fund Cap:\t\t${:,} | href=https://crypto20.com/portal/insights/ image={}'.format(btg_val + int(result['usd_value']), symbol_image_map['C20'])
 
-
 # print total crypto market cap
 print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com image={}'.format(int(crypto_global_result['total_market_cap_usd']), symbol_image_map['MARKET'])
 
