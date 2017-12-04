@@ -21,7 +21,7 @@ import json
 from urllib import urlopen
 
 # change this to the number of C20 tokens that you own
-number_of_c20 = 92761
+number_of_c20 = 0
 
 result = json.loads(urlopen('https://crypto20.com/status').read())
 btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
@@ -135,7 +135,7 @@ print '---'
 
 # print number of c20 you have and their value
 print 'My Tokens:\t\t{:,.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
-print 'My Value:\t\t${:,} | href=https://crypto20.com/users/ image={}'.format(int(usd_value), symbol_image_map['C20'])
+print 'My Value:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(usd_value, symbol_image_map['C20'])
 print '---'
 
 # tokens issues
