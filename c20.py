@@ -21,7 +21,7 @@ import json
 from urllib import urlopen
 
 # change this to the number of C20 tokens that you own
-number_of_c20 = 0
+number_of_c20 = 92761
 
 result = json.loads(urlopen('https://crypto20.com/status').read())
 btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
@@ -149,18 +149,24 @@ holdings = result['holdings'];
 holdings.append({'name': 'BTG', 'value': btg_val})
 
 for holding in holdings:
-    crypto_name = holding['name']
+    crypto_symbol = holding['name']
     crypto_value = float(holding['value'])
     crypto_percentage = crypto_value / float(result['usd_value']) * 100
     c20_value = holding['value']
-    crypto_path = symbol_path_map[crypto_name]
-    crypto_img = symbol_image_map[crypto_name]
-    crypto_price = float(symbol_price[crypto_path])
+    crypto_name = symbol_path_map[crypto_symbol]
+    crypto_img = symbol_image_map[crypto_symbol]
+    crypto_price = float(symbol_price[crypto_name])
 
-    print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://livecoinwatch.com/coins/{:s} image={}'.format(
-        crypto_name,
+    print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
+        crypto_symbol,
         crypto_percentage,
         c20_value,
         crypto_price,
         crypto_name,
         crypto_img)
+
+## Print dashboards
+print "---"
+print "Dashboards"
+print "--youcan.dance/crypto20 | href=http://youcan.dance/crypto20"
+print "--cryptodash1.firebaseapp | href=https://cryptodash1.firebaseapp.com/"
