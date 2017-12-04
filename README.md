@@ -5,6 +5,20 @@
 3. Refresh your bitbar
 4. Comment out lines 131-133 if you want Nav in ETH and BTC
 
+Description
+--- 
+#### c20.py
+* nav in ETH and BTC
+* market cap links to https://livecoinwatch.com/
+* individual holdings link to their respective page on coinmarketcap
+* added dashboard links to youcandance & firebaseapp
+
+#### c20-icon.py
+* compact version at top with only the icon in your menu bar
+
+#### c20-full.py
+* includes a lot more info
+* dev can add more here
 
 ## Screenshots
 ---

@@ -125,11 +125,11 @@ print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV USD:\t${:.4f} | color=#000'.format(net_asset_value)
+print 'NAV USD:\t${:.4f} | href=https://crypto20.com/en/portal/performance/'.format(net_asset_value)
 
 # print nav in ETH and BTC with separator
-print 'NAV ETH:\t{:.8f} ETH | color=#000'.format(nav_eth)
-print 'NAV BTC:\t{:.8f} BTC | color=#000'.format(nav_btc)
+print 'NAV ETH:\t{:.8f} ETH | href=https://crypto20.com/en/portal/performance/'.format(nav_eth)
+print 'NAV BTC:\t{:.8f} BTC | href=https://crypto20.com/en/portal/performance/'.format(nav_btc)
 print '---'
 
 print 'Holdings:\t${:,} | href=https://crypto20.com/users/'.format(int(usd_value))
