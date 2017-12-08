@@ -15,6 +15,7 @@ Description
 * market cap links to https://livecoinwatch.com/
 * individual holdings link to their respective page on coinmarketcap
 * added dashboard links to youcandance & firebaseapp
+* added the amount of each holding you technically hold with your tokens
 
 #### c20-icon.py
 * compact version at top with only the icon in your menu bar
