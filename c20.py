@@ -103,9 +103,12 @@ symbol_image_map = {
     'MARKET': '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'
 }
 
+# total tokens issued
+tokens_issued = float(result['presale'])
+
 # calculate btg nav
 btg_val = int(float(btg_result[0]['price_usd']) * 458)
-btg_nav = float(btg_val) / float(result['presale']) * 0.98 * 0.87
+btg_nav = float(btg_val) / tokens_issued * 0.98 * 0.87
 
 # add on top of current nav
 net_asset_value = float(result['nav_per_token']) + btg_nav
@@ -121,16 +124,22 @@ nav_btc = net_asset_value / btc_price
 # calculate total value
 usd_value = net_asset_value * number_of_c20
 
+# calculate total percentage you own
+percentage_owned = number_of_c20 / tokens_issued
+
 # menu bar icon
 print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'])
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:.4f} USD | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, symbol_image_map['C20'])
+print 'NAV:\t${:.4f} USD | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value,
+                                                                                             symbol_image_map['C20'])
 
 # print nav in ETH and BTC with separator
-print 'NAV:\t{:.8f} ETH | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, symbol_image_map['ETH'])
-print 'NAV:\t{:.8f} BTC | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, symbol_image_map['BTC'])
+print 'NAV:\t{:.8f} ETH | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth,
+                                                                                            symbol_image_map['ETH'])
+print 'NAV:\t{:.8f} BTC | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc,
+                                                                                            symbol_image_map['BTC'])
 print '---'
 
 # print number of c20 you have and their value
@@ -139,20 +148,25 @@ print 'My Value:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format
 print '---'
 
 # tokens issues
-print 'Tokens Issued:\t{:,} | href=https://crypto20.com/portal/performance/ image={}'.format(int(result['presale']), symbol_image_map['C20'])
-print 'Fund Cap:\t\t${:,} | href=https://crypto20.com/portal/insights/ image={}'.format(btg_val + int(result['usd_value']), symbol_image_map['C20'])
+print 'Tokens Issued:\t{:,} | href=https://crypto20.com/portal/performance/ image={}'.format(int(tokens_issued),
+                                                                                             symbol_image_map['C20'])
+print 'Fund Cap:\t\t${:,} | href=https://crypto20.com/portal/insights/ image={}'.format(
+    btg_val + int(result['usd_value']), symbol_image_map['C20'])
 
 # print total crypto market cap
-print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com image={}'.format(int(crypto_global_result['total_market_cap_usd']), symbol_image_map['MARKET'])
+print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com image={}'.format(
+    int(crypto_global_result['total_market_cap_usd']), symbol_image_map['MARKET'])
 
 # separator bitbar recognizes and puts everything under it into a menu
 print '---'
 
 # print holdings
 holdings = result['holdings'];
-holdings.append({'name': 'BTG', 'value': btg_val})
+holdings.append({'name': 'BTG', 'value': btg_val, 'amount': 458})
 
 for holding in holdings:
+    crypto_amount = float(holding['amount'])
+    my_amount = float(crypto_amount*percentage_owned)
     crypto_symbol = holding['name']
     crypto_value = float(holding['value'])
     crypto_percentage = crypto_value / float(result['usd_value']) * 100
@@ -161,11 +175,12 @@ for holding in holdings:
     crypto_img = symbol_image_map[crypto_symbol]
     crypto_price = float(symbol_price[crypto_name])
 
-    print '{:s} \t{:.2f}%\t${:,}\t${:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
+    print '{:<6s} \t{:,.2f}%\t${:<10,}\t${:<10,.2f}\t{:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
         crypto_symbol,
         crypto_percentage,
         c20_value,
         crypto_price,
+        my_amount,
         crypto_name,
         crypto_img)
 
