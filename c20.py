@@ -27,7 +27,7 @@ result = json.loads(urlopen('https://crypto20.com/status').read())
 btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
 eth_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/ethereum').read())
 btc_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin').read())
-top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=25').read())
+top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
 
 # parse out price and put here
