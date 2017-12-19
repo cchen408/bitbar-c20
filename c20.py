@@ -29,6 +29,7 @@ eth_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/ethereu
 btc_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin').read())
 top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
+c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
 
 # parse out price and put here
 symbol_price = {
@@ -132,13 +133,13 @@ print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:.4f} USD | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value,
+print 'NAV:\t${:.4f} USD \t\t {:.4f}%\t 1hr | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, c20_movement_result['1h'],
                                                                                              symbol_image_map['C20'])
 
 # print nav in ETH and BTC with separator
-print 'NAV:\t{:.8f} ETH | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth,
+print 'NAV:\t{:.8f} ETH \t {:.4f}%\t 12hr | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['12h'],
                                                                                             symbol_image_map['ETH'])
-print 'NAV:\t{:.8f} BTC | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc,
+print 'NAV:\t{:.8f} BTC \t {:.4f}%\t 24hr | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['24h'],
                                                                                             symbol_image_map['BTC'])
 print '---'
 
