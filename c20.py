@@ -133,14 +133,11 @@ print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:.4f} USD \t\t 12hr:  {:.4f}%| href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, c20_movement_result['12h'],
-                                                                                             symbol_image_map['C20'])
+print 'NAV:\t${:.4f} USD \t\t\t 12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, c20_movement_result['12h'], symbol_image_map['C20'])
 
 # print nav in ETH and BTC with separator
-print 'NAV:\t{:.8f} ETH \t 24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'],
-                                                                                            symbol_image_map['ETH'])
-print 'NAV:\t{:.8f} BTC \t 1wk:   {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'],
-                                                                                            symbol_image_map['BTC'])
+print 'NAV:\t{:.8f} ETH \t\t 24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], symbol_image_map['ETH'])
+print 'NAV:\t{:.8f} BTC \t\t 1wk:   {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'], symbol_image_map['BTC'])
 print '---'
 
 # print number of c20 you have and their value
