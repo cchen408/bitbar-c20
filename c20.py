@@ -24,50 +24,18 @@ from urllib import urlopen
 number_of_c20 = 0
 
 result = json.loads(urlopen('https://crypto20.com/status').read())
-btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
-eth_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/ethereum').read())
-btc_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin').read())
-top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
+top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
 c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
-
-# parse out price and put here
-symbol_price = {
-    'bitcoin-gold': btg_result[0]['price_usd']
-};
+token_price = {}
+token_symbol_id = {}
+token_id_symbol = {}
 
 # loop through prices rather than call api more than once
-for c in top_25_result:
-    symbol_price[c['id']] = float(c['price_usd'])
-
-# symbol to name map
-symbol_path_map = {
-    'BTC': 'bitcoin',
-    'ETH': 'ethereum',
-    'BCH': 'bitcoin-cash',
-    'XRP': 'ripple',
-    'DASH': 'dash',
-    'LTC': 'litecoin',
-    'MIOTA': 'iota',
-    'XMR': 'monero',
-    'NEO': 'neo',
-    'XEM': 'nem',
-    'ETC': 'ethereum-classic',
-    'LSK': 'lisk',
-    'QTUM': 'qtum',
-    'EOS': 'eos',
-    'ZEC': 'zcash',
-    'OMG': 'omisego',
-    'ADA': 'cardano',
-    'HSR': 'hshare',
-    'XLM': 'stellar',
-    'WAVES': 'waves',
-    'PPT': 'populous',
-    'STRAT': 'stratis',
-    'BTS': 'bitshares',
-    'ARK': 'ark',
-    'BTG': 'bitcoin-gold'
-}
+for c in top_50_result:
+    token_price[c['id']] = float(c['price_usd'])
+    token_symbol_id[c['id']] = c['symbol']
+    token_id_symbol[c['symbol']] = c['id']
 
 # symbol to icon map
 # To generate the images, grab the image (PNG) and increase the DPI from 72 to
@@ -107,33 +75,29 @@ symbol_image_map = {
 # total tokens issued
 tokens_issued = float(result['presale'])
 
-# calculate btg nav
-btg_val = int(float(btg_result[0]['price_usd']) * 458)
-btg_nav = float(btg_val) / tokens_issued * 0.98 * 0.87
-
-# add on top of current nav
-net_asset_value = float(result['nav_per_token']) + btg_nav
+# NAV per token
+nav_per_token = float(result['nav_per_token'])
 
 # calculate the price in eth
-eth_price = float(eth_result[0]['price_usd'])
-nav_eth = net_asset_value / eth_price
+eth_price = float(token_price['ethereum'])
+nav_eth = nav_per_token / eth_price
 
 # calculate the price in btc
-btc_price = float(btc_result[0]['price_usd'])
-nav_btc = net_asset_value / btc_price
+btc_price = float(token_price['bitcoin'])
+nav_btc = nav_per_token / btc_price
 
 # calculate total value
-usd_value = net_asset_value * number_of_c20
+usd_value = nav_per_token * number_of_c20
 
 # calculate total percentage you own
 percentage_owned = number_of_c20 / tokens_issued
 
 # menu bar icon
-print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'])
+print '${:.4f}| templateImage={}'.format(nav_per_token, symbol_image_map['C20'])
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, c20_movement_result['12h'], symbol_image_map['C20'])
+print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result['12h'], symbol_image_map['C20'])
 
 # print nav in ETH and BTC with separator
 print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], symbol_image_map['ETH'])
@@ -149,7 +113,7 @@ print '---'
 print 'Tokens Issued:\t{:,} | href=https://crypto20.com/portal/performance/ image={}'.format(int(tokens_issued),
                                                                                              symbol_image_map['C20'])
 print 'Fund Cap:\t\t${:,} | href=https://crypto20.com/portal/insights/ image={}'.format(
-    btg_val + int(result['usd_value']), symbol_image_map['C20'])
+    int(result['usd_value']), symbol_image_map['C20'])
 
 # print total crypto market cap
 print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com image={}'.format(
@@ -160,7 +124,6 @@ print '---'
 
 # print holdings
 holdings = result['holdings'];
-holdings.append({'name': 'BTG', 'value': btg_val, 'amount': 458})
 
 for holding in holdings:
     crypto_amount = float(holding['amount'])
@@ -169,9 +132,12 @@ for holding in holdings:
     crypto_value = float(holding['value'])
     crypto_percentage = crypto_value / float(result['usd_value']) * 100
     c20_value = holding['value']
-    crypto_name = symbol_path_map[crypto_symbol]
-    crypto_img = symbol_image_map[crypto_symbol]
-    crypto_price = float(symbol_price[crypto_name])
+    crypto_name = token_id_symbol[crypto_symbol]
+    try:
+        crypto_img = symbol_image_map[crypto_symbol]
+    except KeyError:
+        crypto_img = ' '
+    crypto_price = float(token_price[crypto_name])
 
     print '{:<6s} \t{:,.2f}%\t${:<10,}\t${:<10,.2f}\t{:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
         crypto_symbol,
