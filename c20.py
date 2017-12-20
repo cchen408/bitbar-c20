@@ -23,58 +23,24 @@ from urllib import urlopen
 # change this to the number of C20 tokens that you own
 number_of_c20 = 0
 
-result = json.loads(urlopen('https://crypto20.com/status').read())
-btg_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin-gold/').read())
-eth_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/ethereum').read())
-btc_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/bitcoin').read())
-top_25_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
+c20_result = json.loads(urlopen('https://crypto20.com/status').read())
+top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
 c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
-
-# parse out price and put here
-symbol_price = {
-    'bitcoin-gold': btg_result[0]['price_usd']
-};
+token_price = {}
+token_id_symbol = {}
 
 # loop through prices rather than call api more than once
-for c in top_25_result:
-    symbol_price[c['id']] = float(c['price_usd'])
-
-# symbol to name map
-symbol_path_map = {
-    'BTC': 'bitcoin',
-    'ETH': 'ethereum',
-    'BCH': 'bitcoin-cash',
-    'XRP': 'ripple',
-    'DASH': 'dash',
-    'LTC': 'litecoin',
-    'MIOTA': 'iota',
-    'XMR': 'monero',
-    'NEO': 'neo',
-    'XEM': 'nem',
-    'ETC': 'ethereum-classic',
-    'LSK': 'lisk',
-    'QTUM': 'qtum',
-    'EOS': 'eos',
-    'ZEC': 'zcash',
-    'OMG': 'omisego',
-    'ADA': 'cardano',
-    'HSR': 'hshare',
-    'XLM': 'stellar',
-    'WAVES': 'waves',
-    'PPT': 'populous',
-    'STRAT': 'stratis',
-    'BTS': 'bitshares',
-    'ARK': 'ark',
-    'BTG': 'bitcoin-gold'
-}
+for c in top_50_result:
+    token_price[c['id']] = float(c['price_usd'])
+    token_id_symbol[c['symbol']] = c['id']
 
 # symbol to icon map
 # To generate the images, grab the image (PNG) and increase the DPI from 72 to
 # 144. Then resize the image to 32x32. Finally encode the image into base 64.
 # i.e. base64 --input bitcoin.png
 # Then add the resulting encoded text to the correct map entry below.
-symbol_image_map = {
+token_image_symbol = {
     'C20': 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAlCAYAAAAjt+tHAAAAAXNSR0IArs4c6QAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABYlAAAWJQFJUiTwAAADRGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgICAgICAgICB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyI+CiAgICAgICAgIDx4bXA6TW9kaWZ5RGF0ZT4yMDE3LTExLTIwVDA3OjExOjYzPC94bXA6TW9kaWZ5RGF0ZT4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5QaXhlbG1hdG9yIDMuNzwveG1wOkNyZWF0b3JUb29sPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpSZXNvbHV0aW9uVW5pdD4yPC90aWZmOlJlc29sdXRpb25Vbml0PgogICAgICAgICA8dGlmZjpDb21wcmVzc2lvbj41PC90aWZmOkNvbXByZXNzaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+Mjg8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpDb2xvclNwYWNlPjE8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjMyPC9leGlmOlBpeGVsWURpbWVuc2lv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',
     'BTC': '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',
     'ETH': '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',
@@ -105,84 +71,83 @@ symbol_image_map = {
 }
 
 # total tokens issued
-tokens_issued = float(result['presale'])
+tokens_issued = float(c20_result['presale'])
 
-# calculate btg nav
-btg_val = int(float(btg_result[0]['price_usd']) * 458)
-btg_nav = float(btg_val) / tokens_issued * 0.98 * 0.87
-
-# add on top of current nav
-net_asset_value = float(result['nav_per_token']) + btg_nav
+# NAV per token
+nav_per_token = float(c20_result['nav_per_token'])
 
 # calculate the price in eth
-eth_price = float(eth_result[0]['price_usd'])
-nav_eth = net_asset_value / eth_price
+eth_price = float(token_price['ethereum'])
+nav_eth = nav_per_token / eth_price
 
 # calculate the price in btc
-btc_price = float(btc_result[0]['price_usd'])
-nav_btc = net_asset_value / btc_price
+btc_price = float(token_price['bitcoin'])
+nav_btc = nav_per_token / btc_price
 
 # calculate total value
-usd_value = net_asset_value * number_of_c20
+usd_value = nav_per_token * number_of_c20
 
 # calculate total percentage you own
 percentage_owned = number_of_c20 / tokens_issued
 
 # menu bar icon
-print '${:.4f}| templateImage={}'.format(net_asset_value, symbol_image_map['C20'])
+print '${:.4f}| templateImage={}'.format(nav_per_token, token_image_symbol['C20'])
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(net_asset_value, c20_movement_result['12h'], symbol_image_map['C20'])
+print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result['12h'], token_image_symbol['C20'])
 
 # print nav in ETH and BTC with separator
-print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], symbol_image_map['ETH'])
-print 'NAV:\t{:<20.8f}\t1wk:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'], symbol_image_map['BTC'])
+print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], token_image_symbol['ETH'])
+print 'NAV:\t{:<20.8f}\t1wk:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'], token_image_symbol['BTC'])
 print '---'
 
 # print number of c20 you have and their value
-print 'My Tokens:\t\t{:,.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, symbol_image_map['C20'])
-print 'My Value:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(usd_value, symbol_image_map['C20'])
+print 'My Tokens:\t\t{:,.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, token_image_symbol['C20'])
+print 'My Value:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(usd_value, token_image_symbol['C20'])
 print '---'
 
 # tokens issues
 print 'Tokens Issued:\t{:,} | href=https://crypto20.com/portal/performance/ image={}'.format(int(tokens_issued),
-                                                                                             symbol_image_map['C20'])
+                                                                                             token_image_symbol['C20'])
 print 'Fund Cap:\t\t${:,} | href=https://crypto20.com/portal/insights/ image={}'.format(
-    btg_val + int(result['usd_value']), symbol_image_map['C20'])
+    int(c20_result['usd_value']), token_image_symbol['C20'])
 
 # print total crypto market cap
 print 'Market Cap:\t\t${:,} | href=https://livecoinwatch.com image={}'.format(
-    int(crypto_global_result['total_market_cap_usd']), symbol_image_map['MARKET'])
+    int(crypto_global_result['total_market_cap_usd']), token_image_symbol['MARKET'])
 
 # separator bitbar recognizes and puts everything under it into a menu
 print '---'
 
 # print holdings
-holdings = result['holdings'];
-holdings.append({'name': 'BTG', 'value': btg_val, 'amount': 458})
+holdings = c20_result['holdings']
 
 for holding in holdings:
-    crypto_amount = float(holding['amount'])
-    my_amount = float(crypto_amount*percentage_owned)
-    crypto_symbol = holding['name']
-    crypto_value = float(holding['value'])
-    crypto_percentage = crypto_value / float(result['usd_value']) * 100
+    token_amount = float(holding['amount'])
+    my_token_amount = float(token_amount * percentage_owned)
+    token_symbol = holding['name']
+    token_value = float(holding['value'])
+    token_percentage = token_value / float(c20_result['usd_value']) * 100
     c20_value = holding['value']
-    crypto_name = symbol_path_map[crypto_symbol]
-    crypto_img = symbol_image_map[crypto_symbol]
-    crypto_price = float(symbol_price[crypto_name])
+    token_name = token_id_symbol[token_symbol]
+    try:
+        token_img = token_image_symbol[token_symbol]
+    except KeyError:
+        # If we don't have a symbol image, don't fail.
+        token_img = ' '
+    crypto_price = float(token_price[token_name])
 
     print '{:<6s} \t{:,.2f}%\t${:<10,}\t${:<10,.2f}\t{:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
-        crypto_symbol,
-        crypto_percentage,
+        token_symbol,
+        token_percentage,
         c20_value,
         crypto_price,
-        my_amount,
-        crypto_name,
-        crypto_img)
+        my_token_amount,
+        token_name,
+        token_img)
 
-## Print dashboards
+# Print dashboards
 print "---"
 print "Dashboards"
 print "--youcan.dance/crypto20 | href=http://youcan.dance/crypto20"
