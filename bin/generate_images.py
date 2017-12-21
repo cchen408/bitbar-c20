@@ -23,7 +23,7 @@ def process_image(token_image, symbol):
 
     # Write image out with doubled DPI: 72->144
     resized_image.save(image_buffer, format=image.format, dpi=(144, 144))
-    resized_image.save('token_images/{0}.png'.format(symbol), format=image.format, dpi=(144, 144))
+    resized_image.save('../token-images/{0}.png'.format(symbol), format=image.format, dpi=(144, 144))
 
     # Output 16x16 (144x144 dpi) base64 image for debugging
     print base64.b64encode(image_buffer.getvalue())
