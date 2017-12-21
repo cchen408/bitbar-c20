@@ -24,6 +24,7 @@ import os.path
 
 # change this to the number of c20 tokens that you own
 number_of_c20 = 0
+images_source = 'https://raw.githubusercontent.com/themadcanudist/bitbar-c20/dynamic_symbols/token_images/{0}.png'
 
 c20_result = json.loads(urlopen('https://crypto20.com/status').read())
 top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
@@ -68,7 +69,7 @@ percentage_owned = number_of_c20 / tokens_issued
 for token in top_50_result:
     symbol = str(token['symbol']).lower()
     if not os.path.exists('/tmp/token_images/{0}.png'.format(symbol)):
-        token_url = 'https://github.com/cjdowner/cryptocurrency-icons/blob/master/32/color/{0}.png?raw=true'.format(symbol)
+        token_url = images_source.format(symbol)
         token_image = urlopen(token_url).read()
         try:
             os.mkdir('/tmp/token_images')
