@@ -87,6 +87,10 @@ for token in top_50_result:
 print '${:.4f}| templateImage={}'.format(nav_per_token, token_image_symbol['c20'])
 print '---'
 
+# comment out line above and uncomment below if you want icon only
+# menu bar icon only
+# print '| templateImage={}'.format(token_image_symbol['c20'])
+
 # print nav, value of your coins, and total fund value
 print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result['12h'], token_image_symbol['c20'])
 
