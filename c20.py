@@ -68,17 +68,17 @@ percentage_owned = number_of_c20 / tokens_issued
 # Download and cache images from github
 for token in top_50_result:
     symbol = str(token['symbol']).lower()
-    if not os.path.exists('/tmp/token_images/{0}.png'.format(symbol)):
+    if not os.path.exists('/tmp/token-images/{0}.png'.format(symbol)):
         token_url = images_source.format(symbol)
         token_image = urlopen(token_url).read()
         try:
-            os.mkdir('/tmp/token_images')
+            os.mkdir('/tmp/token-images')
         except OSError:
             pass
-        with open('/tmp/token_images/{0}.png'.format(symbol), 'w') as img_file:
+        with open('/tmp/token-images/{0}.png'.format(symbol), 'w') as img_file:
             img_file.write(token_image)
     else:
-        with open('/tmp/token_images/{0}.png'.format(symbol), 'r') as img_file:
+        with open('/tmp/token-images/{0}.png'.format(symbol), 'r') as img_file:
             token_image = img_file.read()
 
     token_image_symbol[symbol] = base64.b64encode(token_image)
