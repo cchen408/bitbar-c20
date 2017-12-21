@@ -83,11 +83,11 @@ for token in top_50_result:
 
     token_image_symbol[symbol] = base64.b64encode(token_image)
 
-# menu bar icon
+# menu bar icon with nav
 print '${:.4f}| templateImage={}'.format(nav_per_token, token_image_symbol['c20'])
 
 # comment out line above and uncomment below if you want icon only
-# menu bar icon only
+# menu bar icon no nav
 # print '| templateImage={}'.format(token_image_symbol['c20'])
 
 print '---'
