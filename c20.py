@@ -14,7 +14,7 @@
 # it. You will be prompted for a Plugins directory. Set this to the folder where
 # you saved c20.py, such as your Downloads folder and you are done.
 #
-# You can also set the number of c20 tokens that you own below to show how much
+# You can also set the number of c20 tokens that you own and your local currency below to show how much
 # your holdings are worth.
 
 import json
@@ -23,13 +23,25 @@ import base64
 import os.path
 
 # change this to the number of c20 tokens that you own
-number_of_c20 = 0
+number_of_c20 = 5000
+
+# change this to your local currency. Possible values are AUD,BGN,BRL,CAD,CHF,CNY,CZK,DKK,GBP,HKD,HRK,HUF,IDR,ILS,INR,JPY,KRW,MXN,MYR,NOK,NZD,PHP,PLN,RON,RUB,SEK,SGD,THB,TRY,ZAR,EUR
+currency = "AUD"
+
+# change this to the amount of fiat invested, so that a profit can be derived
+fiat_invested = 7500
+
 images_source = 'https://raw.githubusercontent.com/cchen408/bitbar-c20/master/token-images/{0}.png'
 
 c20_result = json.loads(urlopen('https://crypto20.com/status').read())
 top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
+fiat_result = json.loads(urlopen('https://api.fixer.io/latest?base=USD').read())
 c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
+if currency == 'USD':
+    currency_rate = 1
+else:
+    currency_rate = float(fiat_result['rates'][currency])
 token_price = {}
 token_id_symbol = {}
 
@@ -60,7 +72,8 @@ btc_price = float(token_price['bitcoin'])
 nav_btc = nav_per_token / btc_price
 
 # calculate total value
-usd_value = nav_per_token * number_of_c20
+usd_value = nav_per_token * number_of_c20 * currency_rate
+profit_val = usd_value - fiat_invested
 
 # calculate total percentage you own
 percentage_owned = number_of_c20 / tokens_issued
@@ -84,25 +97,21 @@ for token in top_50_result:
     token_image_symbol[symbol] = base64.b64encode(token_image)
 
 # menu bar icon with nav
-print '${:.4f}| templateImage={}'.format(nav_per_token, token_image_symbol['c20'])
+print '${:.2f}| templateImage={}'.format(nav_per_token, token_image_symbol['c20'])
 
 # comment out line above and uncomment below if you want icon only
 # menu bar icon no nav
 # print '| templateImage={}'.format(token_image_symbol['c20'])
 
 print '---'
-
-# print nav, value of your coins, and total fund value
-print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result['12h'], token_image_symbol['c20'])
-
-# print nav in ETH and BTC with separator
-print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], token_image_symbol['eth'])
-print 'NAV:\t{:<20.8f}\t1wk:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'], token_image_symbol['btc'])
+print 'NAV:\t${:<20.4f} | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, token_image_symbol['c20'])
+print '1hr:\t{:.2f}%  12hr: {:.2f}%  24hr: {:.2f}%  1w: {:.2f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(c20_movement_result['1h'], c20_movement_result['12h'], c20_movement_result['24h'], c20_movement_result['1w'], token_image_symbol['c20'])
 print '---'
 
 # print number of c20 you have and their value
 print 'My Tokens:\t\t{:,.4f} | href=https://crypto20.com/users/ image={}'.format(number_of_c20, token_image_symbol['c20'])
 print 'My Value:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(usd_value, token_image_symbol['c20'])
+print 'My Profit:\t\t${:,.2f} | href=https://crypto20.com/users/ image={}'.format(profit_val, token_image_symbol['c20'])
 print '---'
 
 # tokens issues
@@ -134,7 +143,7 @@ for holding in holdings:
     except KeyError:
         # If we don't have a symbol image, don't fail.
         token_img = ''
-    crypto_price = float(token_price[token_name])
+    crypto_price = float(token_price[token_name]) * currency_rate
 
     print '{:<6s} \t{:,.2f}%\t${:<10,}\t${:<10,.2f}\t{:,.2f} | href=https://coinmarketcap.com/currencies/{:s} image={}'.format(
         token_symbol,
