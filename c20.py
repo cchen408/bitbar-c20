@@ -29,7 +29,7 @@ images_source = 'https://raw.githubusercontent.com/cchen408/bitbar-c20/master/to
 c20_result = json.loads(urlopen('https://crypto20.com/status').read())
 top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
-c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
+c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read());
 token_price = {}
 token_id_symbol = {}
 
@@ -93,11 +93,11 @@ print '${:.4f}| templateImage={}'.format(nav_per_token, token_image_symbol['c20'
 print '---'
 
 # print nav, value of your coins, and total fund value
-print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result['12h'], token_image_symbol['c20'])
+print 'NAV:\t${:<20.4f}\t\t12hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_per_token, c20_movement_result.get('12h', 0), token_image_symbol['c20'])
 
 # print nav in ETH and BTC with separator
-print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result['24h'], token_image_symbol['eth'])
-print 'NAV:\t{:<20.8f}\t1wk:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result['1w'], token_image_symbol['btc'])
+print 'NAV:\t{:<20.8f}\t24hr:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_eth, c20_movement_result.get('24h', 0), token_image_symbol['eth'])
+print 'NAV:\t{:<20.8f}\t1wk:  {:.4f}% | href=https://crypto20.com/en/portal/performance/ image={}'.format(nav_btc, c20_movement_result.get('1w', 0), token_image_symbol['btc'])
 print '---'
 
 # print number of c20 you have and their value
