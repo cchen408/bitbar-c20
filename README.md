@@ -5,7 +5,8 @@ Download BitBar https://getbitbar.com/
 
 1. Copy `c20.py` into your bitbar plugins directory
 2. In the command prompt run ```chmod 755 c20.py```
-3. Refresh your bitbar
+3. Create a ~/.c20tokens file with the number of tokens you own
+4. Refresh your bitbar
 
 Description
 --- 

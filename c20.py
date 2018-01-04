@@ -22,8 +22,13 @@ from urllib import urlopen
 import base64
 import os.path
 
-# change this to the number of c20 tokens that you own
+# change this to the number of c20 tokens that you own if you don't have a ~/.c20tokens file with the value
 number_of_c20 = 0
+c20tokens_path = os.path.expanduser('~') + '/.c20tokens'
+if os.path.exists(c20tokens_path):
+    with open(c20tokens_path, 'r') as c20tokens_file:
+        number_of_c20 = float(c20tokens_file.read())
+
 images_source = 'https://raw.githubusercontent.com/cchen408/bitbar-c20/master/token-images/{0}.png'
 
 c20_result = json.loads(urlopen('https://crypto20.com/status').read())
