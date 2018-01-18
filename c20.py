@@ -24,6 +24,8 @@ import os.path
 
 # change this to the number of c20 tokens that you own if you don't have a ~/.c20tokens file with the value
 number_of_c20 = 0
+
+# get c20 token number from external file
 c20tokens_path = os.path.expanduser('~') + '/.c20tokens'
 if os.path.exists(c20tokens_path):
     with open(c20tokens_path, 'r') as c20tokens_file:
@@ -34,8 +36,8 @@ images_source = 'https://raw.githubusercontent.com/cchen408/bitbar-c20/master/to
 c20_result = json.loads(urlopen('https://crypto20.com/status').read())
 top_50_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/ticker/?limit=50').read())
 crypto_global_result = json.loads(urlopen('https://api.coinmarketcap.com/v1/global/').read())
-c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read());
-c20_staked_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/staked_earnings').read());
+c20_movement_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/movements').read())
+c20_staked_result = json.loads(urlopen('https://crypto20.com/api/v1/funds/staked_earnings').read())
 token_price = {}
 token_id_symbol = {}
 
@@ -164,7 +166,6 @@ for holding in holdings:
 
 # print staked holdings
 print "---"
-
 for staked in c20_staked_result.get('staked_holdings', {}):
     name = staked.get('name')
 
