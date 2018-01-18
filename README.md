@@ -16,6 +16,7 @@ Description
 * added dashboard links to youcandance & firebaseapp
 * added the amount of each holding you technically hold with your tokens
 * added nav movements
+* added staked earnings 1/17/2018
 
 ### generate_images.py
 1. The `c20.py` script grabs token images from the github repo
