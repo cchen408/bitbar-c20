@@ -26,12 +26,12 @@ Description
 
 ### Python Error Fixes
 
-Error:
+***Error:***
 ```
 IOError: [Errno socket error] [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:590)
 ``` 
 
-Solution:
+***Solution:***
 ```
 brew upgrade openssl
 brew rm python
@@ -42,6 +42,8 @@ change line 1 in c20.py to
 ```
 #!/usr/local/bin/python2
 ```
+
+---
 
 Screenshots
 ---
