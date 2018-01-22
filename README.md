@@ -24,6 +24,25 @@ Description
 2. The devs are responsible for generating them as new coins enter the market. This is done by running `python bin/generate_images.py`. You'll need to install the `pillow` dep and push the resultant generated images back to the repo for the clients to consume.
 3. The `c20.py` script caches token images locally so github isn't hit often.
 
+### Python Error Fixes
+
+Error:
+```
+IOError: [Errno socket error] [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:590)
+``` 
+
+Solution:
+```
+brew upgrade openssl
+brew rm python
+brew install python --with-brewed-openssl
+```
+
+change line 1 in c20.py to
+```
+#!/usr/local/bin/python2
+```
+
 Screenshots
 ---
 ![chris](https://raw.githubusercontent.com/cchen408/bitbar-c20/master/screenshots/chris.png)
